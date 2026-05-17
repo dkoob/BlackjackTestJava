@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Hand {
     private final List<Card> cards = new ArrayList<>();
-    private HandState state= HandState.PLAYING;
+    private HandState state = HandState.PLAYING;
 
     public void addCard(Card card) {
         cards.add(card);
@@ -60,6 +60,10 @@ public class Hand {
 
     public HandState getState() {
         return state;
+    }
+
+    public void setState(HandState state) {
+        this.state = state;
     }
 
     public void clear() {

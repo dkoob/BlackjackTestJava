@@ -13,6 +13,8 @@ public class BlackjackGame {
     private GameState gameState;
     private int currentPlayerIndex;
 
+    private String tempStatus;
+
     public BlackjackGame(int decks, List<Player> players) {
         this.shoe = new Shoe(decks, new FisherYatesShuffle());
         this.players = players;
@@ -36,16 +38,23 @@ public class BlackjackGame {
         gameState = GameState.PLAYER_TURN;
         currentPlayerIndex = 0;
 
-        dealer.getHand().clear();
+        dealer.reset();
+
+        dealer.addCard(shoe.dealCard());
+        dealer.addCard(shoe.dealCard());
 
         for (Player player : players) {
             player.getHand().clear();
             player.addCard(shoe.dealCard());
             player.addCard(shoe.dealCard());
+
+            // temp, to be replaced with insurance handling for the dealer eventually
+            if (player.getHand().isBlackjack() || dealer.getHand().isBlackjack()) {
+                resolveRound();
+            }
         }
 
-        dealer.addCard(shoe.dealCard());
-        dealer.addCard(shoe.dealCard());
+
     }
 
     public void handlePlayerTurn(PlayerAction action) {
@@ -95,19 +104,28 @@ public class BlackjackGame {
 
         for (Player player : players) {
             int playerValue = player.getHand().getValue();
-            if (player.getHand().getState() == HandState.BUST) {
-                System.out.println("Player busted");
+
+            if (player.getHand().isBlackjack()) {
+                tempStatus = "Player Blackjack";
+            } else if (dealer.getHand().isBlackjack()) {
+                tempStatus = "Dealer Blackjack";
+            } else if (player.getHand().getState() == HandState.BUST) {
+                tempStatus = "Player busted";
             } else if (dealer.getHand().getState() == HandState.BUST) {
-                System.out.println("Dealer busted");
+                tempStatus = "Dealer busted";
             } else if (playerValue > dealerValue) {
-                System.out.println("Player beat dealer");
+                tempStatus = "Player beat dealer";
             } else if (playerValue < dealerValue) {
-                System.out.println("Dealer beat player");
+                tempStatus = "Dealer beat player";
             } else {
-                System.out.println("Push");
+                tempStatus = "Push";
             }
         }
 
         gameState = GameState.ROUND_OVER;
+    }
+
+    public String getTempStatus() {
+        return tempStatus;
     }
 }

@@ -18,7 +18,7 @@ public class PlayerLayout extends Layout<Player>{
 
     @Override
     protected int getSlotOneX() {
-        return 611;
+        return 619;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PlayerLayout extends Layout<Player>{
 
     @Override
     protected int getSlotTwoX() {
-        return 808;
+        return 816;
     }
 
     @Override

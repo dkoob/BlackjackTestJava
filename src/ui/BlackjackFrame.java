@@ -8,9 +8,8 @@ public class BlackjackFrame extends JFrame {
 
     public BlackjackFrame() {
         setTitle("Blackjack Game");
-        setSize(width, height);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setResizable(false);
 
         try {
@@ -18,6 +17,9 @@ public class BlackjackFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 }

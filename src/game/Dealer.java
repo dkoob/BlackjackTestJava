@@ -13,6 +13,11 @@ public class Dealer {
         return hand;
     }
 
+    public void reset() {
+        hand.clear();
+        hand.setState(HandState.PLAYING);
+    }
+
     public String peekHand() {
         return "┌────────── DEALER HAND ──────────\n" + hand.toString(true) + "└──────────────────────────";
     }

@@ -21,4 +21,9 @@ public class TableBackgroundPanel extends JPanel {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(1600, 900);
+    }
 }

@@ -10,7 +10,11 @@ public class UIHelpers {
     }
 
     public static void placeCentered(JComponent component, int centerX, int y) {
-        Dimension dimension = component.getPreferredSize();
-        component.setBounds(centerX - dimension.width / 2, y, dimension.width, dimension.height);
+        component.setSize(component.getPreferredSize());
+
+        int width = component.getWidth();
+        int height = component.getHeight();
+
+        component.setLocation(centerX - width / 2, y);
     }
 }
