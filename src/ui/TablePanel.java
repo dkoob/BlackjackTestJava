@@ -27,10 +27,12 @@ public class TablePanel extends JPanel {
     CardSlot initialPlayerSlot1 = new CardSlot(cardSpriteManager);
     CardSlot initialPlayerSlot2 = new CardSlot(cardSpriteManager);
 
+    // all temp stuff
     JButton dealButton = new JButton("Deal Cards");
     JButton hitButton = new JButton("Hit");
     JButton standButton = new JButton("Stand");
     JButton resetButton = new JButton("Reset");
+    JLabel statusLabel = new JLabel("Init");
 
     public TablePanel() throws IOException {
         players = new ArrayList<>();
@@ -41,10 +43,16 @@ public class TablePanel extends JPanel {
         setLayout(null);
         setOpaque(false);
 
+        statusLabel.setForeground(Color.WHITE);
+        statusLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        statusLabel.setOpaque(true);
+        statusLabel.setHorizontalAlignment(JLabel.CENTER);
+
         dealButton.setBackground(Color.RED);
         dealButton.setForeground(Color.WHITE);
         dealButton.setOpaque(true);
         dealButton.setFocusable(false);
+        dealButton.setFont(new Font("Arial", Font.BOLD, 16));
         dealButton.addActionListener(e -> {
             game.startRound();
             updateFromGame();
@@ -54,6 +62,7 @@ public class TablePanel extends JPanel {
         hitButton.setForeground(Color.WHITE);
         hitButton.setOpaque(true);
         hitButton.setFocusable(false);
+        hitButton.setFont(new Font("Arial", Font.BOLD, 16));
         hitButton.addActionListener(e -> {
             game.handlePlayerTurn(PlayerAction.HIT);
             updateFromGame();
@@ -64,6 +73,7 @@ public class TablePanel extends JPanel {
         standButton.setForeground(Color.WHITE);
         standButton.setOpaque(true);
         standButton.setFocusable(false);
+        standButton.setFont(new Font("Arial", Font.BOLD, 16));
         standButton.addActionListener(e -> {
             game.handlePlayerTurn(PlayerAction.STAND);
             updateFromGame();
@@ -74,6 +84,7 @@ public class TablePanel extends JPanel {
         resetButton.setForeground(Color.WHITE);
         resetButton.setOpaque(true);
         resetButton.setFocusable(false);
+        resetButton.setFont(new Font("Arial", Font.BOLD, 16));
         resetButton.addActionListener(e -> {
             clearCards();
             initializeTablePanel();
@@ -86,10 +97,12 @@ public class TablePanel extends JPanel {
         add(hitButton);
         add(standButton);
         add(resetButton);
+        add(statusLabel);
         placeCentered(dealButton, 800, 800);
         placeCentered(hitButton, 900, 800);
         placeCentered(standButton, 700, 800);
         placeCentered(resetButton, 1000, 800);
+        placeCentered(statusLabel, 800, 450);
     }
 
     private void checkGameProgression() {
